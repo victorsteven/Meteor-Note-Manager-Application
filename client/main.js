@@ -8,6 +8,7 @@ Accounts.ui.config({
 });
 
 import './main.html';
+import { Meteor } from 'meteor/meteor';
 
 Template.body.helpers({
 
@@ -31,22 +32,27 @@ Template.add.events({
 
     // console.log(text)
     //insert note:
-    Notes.insert({
-      text,
-      createdAt: new Date()
-    });
+    // Notes.insert({
+    //   text,
+    //   createdAt: new Date(),
+    //   owner: Meteor.userId(),
+    //   username: Meteor.user().username,
+    // });
+
+    Meteor.call('notes.insert', text);
 
     target.text.value = '';
 
     $('#addmodal').modal('close');
-
+ 
     return false;
   }
 });
 
 Template.note.events({
   'click .delete-note': function(){
-    Notes.remove(this._id);
+    // Notes.remove(this._id);
+    Meteor.call ('notes.remove', this);
 
     return false;
   }
