@@ -1,5 +1,11 @@
 import { Template } from 'meteor/templating';
 import { Notes } from '../lib/collections.js';
+import { Accounts } from 'meteor/accounts-base';
+
+//Account config:
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_ONLY'
+});
 
 import './main.html';
 
